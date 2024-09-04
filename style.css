@@ -1,0 +1,117 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.start-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  > .start-button {
+    padding: 20px 40px;
+    font-size: 24px;
+    border: none;
+    border-radius: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+.player-names-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
+  > input[type="text"] {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  > .start-game-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+.game-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
+  > .game-field {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    width: 300px;
+    height: 300px;
+
+    > .cell {
+      background-color: #f0f0f0;
+      margin: 5px;
+      border: 1px solid #333;
+      cursor: pointer;
+      box-shadow: 3px 4px 1px 1px rgba(1, 1, 1, 0.36);
+    }
+  }
+
+  > .game-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 24px;
+    width: 250px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+}
+
+
+.game-over-screen {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  > .game-over-message {
+    font-size: 36px;
+  }
+}
+
+.result-screen {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  > .results-list {
+
+  }
+
+  > .view-results-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+
