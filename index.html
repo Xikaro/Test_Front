@@ -9,13 +9,15 @@
 <body>
 <!-- Экран старта -->
 <div class="start-screen">
-		<button class="start-button">Старт</button>
+		<button class="start-button" type="button">Старт</button>
 </div>
 <!-- Экран ввода имён игроков -->
 <div class="player-names-screen">
+		<label for="player1-name">Имя игрока 1:</label>
 		<input id="player1-name" placeholder="Имя игрока 1" type="text">
+		<label for="player2-name">Имя игрока 2:</label>
 		<input id="player2-name" placeholder="Имя игрока 2" type="text">
-		<button class="start-game-button">Начать игру</button>
+		<button class="start-game-button" type="button">Начать игру</button>
 </div>
 <!-- Экран игры -->
 <div class="game-screen">
@@ -37,15 +39,36 @@
 		</div>
 </div>
 <!-- Экран окончания игры -->
-<div class="game-over-screen">
-		<h2 id="game-over-message"></h2>
+<div class="end-screen">
+		<h2 id="end-message">Игра окончена</h2>
+		<h3 id="winner-message"></h3>
+		<button id="start-new-game-button" type="button">Начать новую игру</button>
 </div>
 
 <!-- Экран просмотра результатов -->
 <div class="result-screen">
-		<h2>Результаты игры</h2>
-		<ul id="results-list"></ul>
-		<button class="view-results-button">Просмотреть результаты</button>
+		<div class="result-header">
+				<h2>Результаты игры</h2>
+				<button id="view-result-button" type="button">Просмотреть результаты</button>
+		</div>
+		<div class="popup">
+				<div id="result-popup">
+						<h2>Результаты</h2>
+						<table>
+								<thead>
+								<tr>
+										<th>Победитель</th>
+										<th>Время</th>
+										<th>Дата</th>
+								</tr>
+								</thead>
+								<tbody id="result-table-body"></tbody>
+						</table>
+						<button id="close-popup-button" type="button">Закрыть</button>
+				</div>
+				<div id="result-popup-overlay"></div>
+		</div>
+
 </div>
 <script src="script.js"></script>
 </body>
