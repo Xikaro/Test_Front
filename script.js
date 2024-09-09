@@ -31,7 +31,7 @@ let gameResults = [];
 // Добавить слушатели событий
 startButton.addEventListener('click', startGame);
 startGameButton.addEventListener('click', startGameAfterPlayerNames);
-gameField.addEventListener('click', playerMove);  
+gameField.addEventListener('click', playerMove);
 
 // Функция начала игры
 function startGame() {
@@ -44,7 +44,7 @@ function startGame() {
 
 // Функция начала игры после ввода имён игроков
 function startGameAfterPlayerNames() {
-  // Скрыть экран ввода имён игроков
+  // Скрыть экран ввода имён игроков 
   playerNamesScreen.style.display = 'none';
 
   // Показать экран игры
@@ -62,13 +62,13 @@ function startGameAfterPlayerNames() {
 
   // Добавить игроков в массив
   players.push(player1, player2);
-
+ 
   // Выбрать случайного первого игрока
   const firstPlayer = players[Math.floor(Math.random() * 2)];
 
   // Показать информацию о первом игроке
-  currentPlayer.textContent = `Ходит ${firstPlayer.name}`;
-  currentFigure.textContent = `Фигурой ${firstPlayer.figure}`; 
+  currentPlayer.textContent = `Ходит Игрок ${firstPlayer.name}`;
+  currentFigure.textContent = `Фигурой ${firstPlayer.figure}`;
 
   // Сбросить игровое поле
   gameField.innerHTML = '';
@@ -85,31 +85,31 @@ function startGameAfterPlayerNames() {
   }
 }
 
-//
-// // Функция хода игрока
-// function playerMove(event) {
-//   // Получить ячейку, на которую нажали
-//   const cell = event.target;
-//
-//   // Проверить, является ли ячейка пустой
-//   if (cell.textContent === '') {
-//     // Показать фигуру игрока в ячейке
-//     cell.textContent = players[0].figure;
-//
-//     // Проверить, выиграл игрок
-//     const winner = checkWinner();
-//     if (winner) {
-//       showEndScreen(winner);
-//       return;
-//     }
-//
-//     // Сменить игроков
-//     players.reverse();
-//
-//     // Показать информацию о следующем игроке
-//     currentPlayer.textContent = `Ходит ${players[0].name} (${players[0].figure})`;
-//   }
-// }
+// Функция хода игрока
+function playerMove(event) {
+  // Получить ячейку, на которую нажали
+  const cell = event.target;
+
+  // Проверить, является ли ячейка пустой
+  if (cell.textContent === '') {
+    // Показать фигуру игрока в ячейке
+    cell.textContent = players[0].figure;
+
+    // Проверить, выиграл игрок
+    const winner = checkWinner();
+    if (winner) {
+      showEndScreen(winner);
+      return;
+    }
+
+    // Сменить игроков
+    players.reverse();
+
+    // Показать информацию о следующем игроке
+    currentPlayer.textContent = `Ходит ${players[0].name} (${players[0].figure})`;
+  }
+}
+
 //
 // // Функция проверки победы
 // function checkWinner() {
