@@ -64,6 +64,12 @@ body {
       border: 1px solid #333;
       cursor: pointer;
       box-shadow: 3px 4px 1px 1px rgba(1, 1, 1, 0.36);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      overflow: hidden
     }
   }
 

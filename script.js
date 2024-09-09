@@ -14,7 +14,6 @@ const gameField = document.querySelector('.game-field');
 
 const gameInfo = document.querySelector('.game-info');
 const currentPlayer = document.querySelector('#current-player');
-const currentFigure = document.querySelector('#current-figure');
 
 // Экран окончания игры 
 const gameOverScreen = document.querySelector('.game-over-screen');
@@ -62,26 +61,17 @@ function startGameAfterPlayerNames() {
 
   // Добавить игроков в массив
   players.push(player1, player2);
- 
+
   // Выбрать случайного первого игрока
   const firstPlayer = players[Math.floor(Math.random() * 2)];
 
   // Показать информацию о первом игроке
-  currentPlayer.textContent = `Ходит Игрок ${firstPlayer.name}`;
-  currentFigure.textContent = `Фигурой ${firstPlayer.figure}`;
+  currentPlayer.textContent = `Ходит Игрок ${firstPlayer.name} (${firstPlayer.figure})`;
 
-  // Сбросить игровое поле
-  gameField.innerHTML = '';
-  for (let i = 0; i < 3; i++) {
-    const row = document.createElement('div');
-    row.classList.add('row');
-    for (let j = 0; j < 3; j++) {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
-      cell.addEventListener('click', playerMove);
-      row.appendChild(cell);
-    }
-    gameField.appendChild(row);
+  const cells = gameField.children;
+  for (let i = 0; i < cells.length; i++) {
+    cells[i].innerHTML = '';
+    cells[i].addEventListener('click', playerMove);
   }
 }
 
@@ -92,6 +82,7 @@ function playerMove(event) {
 
   // Проверить, является ли ячейка пустой
   if (cell.textContent === '') {
+
     // Показать фигуру игрока в ячейке
     cell.textContent = players[0].figure;
 
@@ -106,81 +97,76 @@ function playerMove(event) {
     players.reverse();
 
     // Показать информацию о следующем игроке
-    currentPlayer.textContent = `Ходит ${players[0].name} (${players[0].figure})`;
+    currentPlayer.textContent = `Ходит Игрок ${players[0].name} (${players[0].figure})`;
   }
 }
 
-//
-// // Функция проверки победы
-// function checkWinner() {
-//   // Проверить горизонтальные линии
-//   for (let i = 0; i < 3; i++) {
-//     const row = gameField.children[i];
-//     const figure = row.children[0].textContent;
-//     if (figure && row.children[0].textContent === row.children[1].textContent
-//         && row.children[1].textContent === row.children[2].textContent) {
-//       return players[0];
-//     }
-//   }
-//
-//   // Проверить вертикальные линии
-//   for (let i = 0; i < 3; i++) {
-//     const figure = gameField.children[0].children[i].textContent;
-//     if (figure && gameField.children[0].children[i].textContent
-//         === gameField.children[1].children[i].textContent
-//         && gameField.children[1].children[i].textContent
-//         === gameField.children[2].children[i].textContent) {
-//       return players[0];
-//     }
-//   }
-//
-//   // Проверить диагональные линии
-//   const figure1 = gameField.children[0].children[0].textContent;
-//   if (figure1 && gameField.children[0].children[0].textContent
-//       === gameField.children[1].children[1].textContent
-//       && gameField.children[1].children[1].textContent
-//       === gameField.children[2].children[2].textContent) {
-//     return players[0];
-//   }
-//
-//   const figure2 = gameField.children[0].children[2].textContent;
-//   if (figure2 && gameField.children[0].children[2].textContent
-//       === gameField.children[1].children[1].textContent
-//       && gameField.children[1].children[1].textContent
-//       === gameField.children[2].children[0].textContent) {
-//     return players[0];
-//   }
-//
-//   // Если никто не выиграл, вернуть null
-//   return null;
-// }
-//
-// // Функция отображения экрана завершения
-// function showEndScreen(winner) {
-//   const endScreen = document.createElement('div');
-//   endScreen.id = 'end-screen';
-//
-//   const header = document.createElement('h1');
-//   header.textContent = 'Игра окончена';
-//   endScreen.appendChild(header);
-//
-//   const message = document.createElement('p');
-//   if (winner === players[0]) {
-//     message.textContent = 'Победитель: ' + players[0];
-//   } else if (winner === players[1]) {
-//     message.textContent = 'Победитель: ' + players[1];
-//   } else {
-//     message.textContent = 'Ничья';
-//   }
-//   endScreen.appendChild(message);
-//
-//   const button = document.createElement('button');
-//   button.textContent = 'Начать новую игру';
-//   button.addEventListener('click', () => {
-//     document.body.removeChild(endScreen);
-//     startGame();
-//   });
-//   endScreen.appendChild(button);
-//
-//   document.body.appendChild(endScreen);
-// }
+// Функция проверки победы
+function checkWinner() {
+  const gameFieldChildren = gameField.children;
+  const playerFigure = players[0].figure;
+
+  // Проверить горизонтальные линии
+  for (let i = 0; i < 3; i++) {
+    const row = gameFieldChildren[i];
+    if (row.children[0].textContent === playerFigure
+        && row.children[1].textContent === playerFigure
+        && row.children[2].textContent === playerFigure) {
+      return players[0];
+    }
+  }
+
+  // Проверить вертикальные линии
+  for (let i = 0; i < 3; i++) {
+    if (gameFieldChildren[0].children[i].textContent === playerFigure
+        && gameFieldChildren[1].children[i].textContent === playerFigure
+        && gameFieldChildren[2].children[i].textContent === playerFigure) {
+      return players[0];
+    }
+  }
+
+  // Проверить диагональные линии
+  if (gameFieldChildren[0].children[0].textContent === playerFigure
+      && gameFieldChildren[1].children[1].textContent === playerFigure
+      && gameFieldChildren[2].children[2].textContent === playerFigure) {
+    return players[0];
+  }
+  if (gameFieldChildren[0].children[2].textContent === playerFigure
+      && gameFieldChildren[1].children[1].textContent === playerFigure
+      && gameFieldChildren[2].children[0].textContent === playerFigure) {
+    return players[0];
+  }
+
+  // Если никто не выиграл, вернуть null
+  return null;
+}
+
+// Функция отображения экрана завершения
+function showEndScreen(winner) {
+  const endScreen = document.createElement('div');
+  endScreen.id = 'end-screen';
+
+  const header = document.createElement('h1');
+  header.textContent = 'Игра окончена';
+  endScreen.appendChild(header);
+
+  const message = document.createElement('p');
+  if (winner === players[0]) {
+    message.textContent = 'Победитель: ' + players[0];
+  } else if (winner === players[1]) {
+    message.textContent = 'Победитель: ' + players[1];
+  } else {
+    message.textContent = 'Ничья';
+  }
+  endScreen.appendChild(message);
+
+  const button = document.createElement('button');
+  button.textContent = 'Начать новую игру';
+  button.addEventListener('click', () => {
+    document.body.removeChild(endScreen);
+    startGame();
+  });
+  endScreen.appendChild(button);
+
+  document.body.appendChild(endScreen);
+}
